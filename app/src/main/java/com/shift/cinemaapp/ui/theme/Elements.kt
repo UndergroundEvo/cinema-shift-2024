@@ -67,7 +67,11 @@ fun navBar() {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = selectedItemIndex == index,
-                        onClick = { selectedItemIndex = index },
+                        onClick = {
+                            selectedItemIndex = index
+
+                            //navController.navigate
+                                  },
                         label = { Text(text = item.title) },
                         icon = {
                             BadgedBox(
