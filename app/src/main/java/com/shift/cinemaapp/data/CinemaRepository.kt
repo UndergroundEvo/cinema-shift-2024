@@ -3,6 +3,7 @@ package com.shift.cinemaapp.data
 import com.shift.cinemaapp.Film
 import com.shift.cinemaapp.FilmModel
 import com.shift.cinemaapp.TodayModel
+import com.shift.cinemaapp.UserRatings
 import com.shift.cinemaapp.data.model.ScheduleModel
 import com.shift.cinemaapp.data.model.Schedules
 
