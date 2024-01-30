@@ -1,12 +1,11 @@
-package com.shift.cinemaapp.data.model
+package com.shift.cinemaapp
 
 import com.google.gson.annotations.SerializedName
 
 
-data class Today (
+data class TodayModel (
 
   @SerializedName("success" ) var success : Boolean?         = null,
-  @SerializedName("reason"  ) var reason  : String?          = null,
   @SerializedName("films"   ) var films   : ArrayList<Film> = arrayListOf()
 
 )

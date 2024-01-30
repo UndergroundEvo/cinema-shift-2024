@@ -1,6 +1,7 @@
-package com.shift.cinemaapp
+package com.shift.cinemaapp.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.shift.cinemaapp.Seances
 
 
 data class Schedules (

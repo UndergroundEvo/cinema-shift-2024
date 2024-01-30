@@ -1,4 +1,4 @@
-package com.shift.cinemaapp.data.model
+package com.shift.cinemaapp
 
 import com.google.gson.annotations.SerializedName
 
@@ -16,7 +16,6 @@ data class Film (
   @SerializedName("ageRating"    ) var ageRating    : String?              = null,
   @SerializedName("genres"       ) var genres       : ArrayList<String>    = arrayListOf(),
   @SerializedName("userRatings"  ) var userRatings  : UserRatings?         = UserRatings(),
-  @SerializedName("img"          ) var img          : String?              = null,
-  @SerializedName("country"      ) var country      : Country?             = Country()
+  @SerializedName("img"          ) var img          : String?              = null
 
 )

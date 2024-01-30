@@ -1,4 +1,4 @@
-package com.shift.cinemaapp.data.model
+package com.shift.cinemaapp
 
 import com.google.gson.annotations.SerializedName
 
