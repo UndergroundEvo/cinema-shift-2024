@@ -74,21 +74,21 @@ fun navBar() {
     val items = listOf(
         BottomNavigationItem(
             //title = R.string.afisha.toString(),
-            title = "Афиша",
+            title = stringResource(id = R.string.afisha),
             icon = ImageVector.vectorResource(R.drawable.movie),
             hasNews = false,
             badgeCount = null
         ),
         BottomNavigationItem(
             //title = R.string.tickets.toString(),
-            title = "Билеты",
+            title = stringResource(id = R.string.tickets),
             icon = ImageVector.vectorResource(R.drawable.ticket),
             hasNews = false,
             badgeCount = null
         ),
         BottomNavigationItem(
             //title = R.string.profile.toString(),
-            title = "Профиль",
+            title = stringResource(id = R.string.profile),
             icon = ImageVector.vectorResource(R.drawable.profile),
             hasNews = false,
             badgeCount = null
@@ -152,9 +152,9 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Error!!")
+        Text(text = stringResource(id = R.string.no_internet))
         Button(onClick = retryAction) {
-            Text(text = "Error!!")
+            Text(text = stringResource(id = R.string.again))
         }
     }
 }
@@ -238,14 +238,14 @@ fun MovieCard(
                         .padding(top = 4.dp, bottom = 8.dp, start = 13.dp),
                 )
             }
-            FilledTonalButton(
+            Button(
                 onClick = { /*TODO*/ },
                 modifier = modifier
                     .padding(12.dp),
 
 
             ) {
-                Text(text = "Подробнее")
+                Text(text = stringResource(id = R.string.more))
             }
         }
     }

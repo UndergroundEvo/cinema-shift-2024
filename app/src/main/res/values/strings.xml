@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">CinemaApp</string>
-    <string name="afisha">Афиша</string>
-    <string name="tickets">Билеты</string>
-    <string name="profile">Профиль</string>
+    <string name="afisha">Movies</string>
+    <string name="tickets">Tickets</string>
+    <string name="profile">Profile</string>
+    <string name="no_internet">Lost internet connection</string>
+    <string name="again">Retry</string>
+    <string name="more">More</string>
 </resources>

@@ -58,7 +58,7 @@ fun BooksApp(
         viewModel(factory = CinemaViewModel.Factory)
 
     //временно
-    val items = listOf(
+/*    val items = listOf(
         BottomNavigationItem(
             //title = R.string.afisha.toString(),
             title = "Афиша",
@@ -83,13 +83,13 @@ fun BooksApp(
     )
     var selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
-    }
+    }*/
     //временно
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar {
+            NavigationBar {/*
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = selectedItemIndex == index,
@@ -115,7 +115,7 @@ fun BooksApp(
                             }
                         })
                 }
-            }
+            */}
         }
 
     ) {
