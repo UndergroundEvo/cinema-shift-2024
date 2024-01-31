@@ -203,8 +203,8 @@ fun MovieCard(
                     .data("https://shift-backend.onrender.com"+movie.img)
                     .crossfade(true)
                     .build(),
-                error = painterResource(id = R.drawable.ic_launcher_background),
-                placeholder = painterResource(id = R.drawable.ic_launcher_background),
+                error = painterResource(id = R.drawable.baseline_error_outline_24),
+                placeholder = painterResource(id = R.drawable.baseline_history_toggle_off_24),
                 contentDescription = stringResource(id = R.string.app_name),
                 contentScale = ContentScale.Crop
             )
