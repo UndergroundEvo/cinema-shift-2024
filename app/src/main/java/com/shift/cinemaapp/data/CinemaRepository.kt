@@ -1,16 +1,12 @@
 package com.shift.cinemaapp.data
 
-import com.shift.cinemaapp.Film
-import com.shift.cinemaapp.FilmModel
-import com.shift.cinemaapp.TodayModel
-import com.shift.cinemaapp.UserRatings
-import com.shift.cinemaapp.data.model.ScheduleModel
+import com.shift.cinemaapp.data.model.Film
 import com.shift.cinemaapp.data.model.Schedules
 
 interface CinemaRepository {
     suspend fun getToday() : List<Film>
 //    suspend fun getFilm(filmId : Int) : List<Film>
-    suspend fun getSchedules(filmId : Int) : List<Schedules>
+/*    suspend fun getSchedules(filmId : Int) : List<Schedules>*/
 }
 
 class NetworkCinemaRepository(
@@ -30,7 +26,8 @@ class NetworkCinemaRepository(
             ageRating = films.ageRating,
             genres = films.genres,
             userRatings = films.userRatings,
-            img = films.img
+            img = films.img,
+            country = films.country
         )
     }
 /*    override suspend fun getFilm(filmId : Int)
@@ -51,9 +48,9 @@ class NetworkCinemaRepository(
         )
     }*/
 
-    override suspend fun getSchedules(filmId: Int)
+/*    override suspend fun getSchedules(filmId: Int)
             : List<Schedules> = cinemaService.getSchedules(filmId).schedules.map { schedules ->
         Schedules(
         )
-    }
+    }*/
 }
