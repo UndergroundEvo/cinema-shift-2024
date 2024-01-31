@@ -1,12 +1,9 @@
-package com.shift.cinemaapp
-
-import com.google.gson.annotations.SerializedName
-
+package com.shift.cinemaapp.data.model
 
 data class Seances (
 
-  @SerializedName("time"         ) var time         : String?           = null,
-  @SerializedName("hall"         ) var hall         : Hall?             = Hall(),
-  @SerializedName("payedTickets" ) var payedTickets : ArrayList<String> = arrayListOf()
+    var time         : String,
+    var hall         : Hall,
+    var payedTickets : List<String>
 
 )

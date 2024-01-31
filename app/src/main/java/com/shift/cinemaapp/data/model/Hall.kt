@@ -1,11 +1,7 @@
-package com.shift.cinemaapp
-
-import com.google.gson.annotations.SerializedName
-
+package com.shift.cinemaapp.data.model
 
 data class Hall (
 
-  @SerializedName("name"   ) var name   : String?                      = null,
-  @SerializedName("places" ) var places : ArrayList<ArrayList<Places>> = arrayListOf()
-
+  val name   : String,
+  val places : List<List<Places>>
 )

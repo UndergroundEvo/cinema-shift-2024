@@ -1,11 +1,7 @@
-package com.shift.cinemaapp
-
-import com.google.gson.annotations.SerializedName
-
+package com.shift.cinemaapp.data.model
 
 data class FilmModel (
 
-  @SerializedName("success" ) var success : Boolean? = null,
-  @SerializedName("film"    ) var film    : Film?    = Film()
-
+  val success : Boolean,
+  val film    : Film
 )

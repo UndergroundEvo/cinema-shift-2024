@@ -1,11 +1,8 @@
-package com.shift.cinemaapp
-
-import com.google.gson.annotations.SerializedName
-
+package com.shift.cinemaapp.data.model
 
 data class UserRatings (
 
-  @SerializedName("kinopoisk" ) var kinopoisk : String? = null,
-  @SerializedName("imdb"      ) var imdb      : String? = null
+  val kinopoisk : String,
+  val imdb      : String
 
 )
