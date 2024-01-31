@@ -43,17 +43,6 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             CinemaAppTheme {
-/*                NavHost(
-                    navController = navController,
-                    startDestination = "screen_1"
-                ){
-                    composable("screen_1"){
-                        navBar()
-                    }
-                    composable("screen_2"){
-                        topBar("fas")
-                    }
-                }*/
                 BooksApp()
             }
         }
