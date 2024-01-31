@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Кинотеатр</string>
+    <string name="app_name">Кинотеатр ШИФТ</string>
     <string name="afisha">Афиша</string>
     <string name="tickets">Билеты</string>
     <string name="profile">Профиль</string>
     <string name="no_internet">Нет подключения к интернету</string>
     <string name="again">Повторить</string>
     <string name="more">Подробнее</string>
+    <string name="kinopoisk">Кинопоиск</string>
 </resources>
