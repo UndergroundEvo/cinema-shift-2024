@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.shift.cinemaapp.R
@@ -29,28 +30,37 @@ import com.shift.cinemaapp.data.CinemaViewModel
 fun CinemaApp(
     modifier: Modifier = Modifier
 ) {
-    val cinemaViewModel: CinemaViewModel =
-        viewModel(factory = CinemaViewModel.Factory)
+    //пока отключен
+    val cinemaViewModel: CinemaViewModel = viewModel(factory = CinemaViewModel.Factory)
+    /*
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = NavigationKeys.MAIN_AFISHA
+    ){
+        composable(NavigationKeys.MAIN_AFISHA){
+        }
+        composable(NavigationKeys.TICKETS){}
+        composable(NavigationKeys.PROFILE){}
+    }*/
+
 
     //пока не придумал как это отделить от navBar
         val items = listOf(
             BottomNavigationItem(
-                //title = R.string.afisha.toString(),
-                title = "Афиша",
+                title = stringResource(R.string.afisha),
                 icon = ImageVector.vectorResource(R.drawable.movie),
                 hasNews = false,
                 badgeCount = null
             ),
             BottomNavigationItem(
-                //title = R.string.tickets.toString(),
-                title = "Билеты",
+                title = stringResource(R.string.tickets),
                 icon = ImageVector.vectorResource(R.drawable.ticket),
                 hasNews = false,
                 badgeCount = null
             ),
             BottomNavigationItem(
-                //title = R.string.profile.toString(),
-                title = "Профиль",
+                title = stringResource(R.string.profile),
                 icon = ImageVector.vectorResource(R.drawable.profile),
                 hasNews = false,
                 badgeCount = null
@@ -60,7 +70,6 @@ fun CinemaApp(
             mutableStateOf(0)
         }
     //временно
-
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
@@ -70,8 +79,7 @@ fun CinemaApp(
                         selected = selectedItemIndex == index,
                         onClick = {
                             selectedItemIndex = index
-
-                            //navController.navigate
+                            /*navController.navigate(NavigationKeys.MAIN_AFISHA)*/
                         },
                         label = { Text(text = item.title) },
                         icon = {
@@ -92,18 +100,18 @@ fun CinemaApp(
                 }
             }
         }
-
+    //временно
     ) {
         Surface(
             modifier = modifier
                 .fillMaxSize()
                 .padding(it),
-            //color = MaterialTheme.colors.background
         ) {
             HomeScreen(
                 cinemaUiState = cinemaViewModel.cinemaUiState,
                 retryAction = { cinemaViewModel.getFilm() },
-                modifier = modifier
+                modifier = modifier,
+                /*navControl = navController*/
             )
         }
     }
