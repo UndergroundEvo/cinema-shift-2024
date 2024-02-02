@@ -1,7 +1,6 @@
 package com.shift.cinemaapp.data
 
 import com.shift.cinemaapp.data.model.Film
-import com.shift.cinemaapp.data.model.Schedules
 
 interface CinemaRepository {
     suspend fun getToday() : List<Film>

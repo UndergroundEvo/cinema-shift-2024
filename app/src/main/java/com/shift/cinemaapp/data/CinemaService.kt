@@ -1,9 +1,7 @@
 package com.shift.cinemaapp.data
 
-import com.shift.cinemaapp.data.model.ScheduleModel
 import com.shift.cinemaapp.data.model.TodayModel
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 interface CinemaService {
     @GET("cinema/today")
