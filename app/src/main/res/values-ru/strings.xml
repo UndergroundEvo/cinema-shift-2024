@@ -8,4 +8,7 @@
     <string name="again">Повторить</string>
     <string name="more">Подробнее</string>
     <string name="kinopoisk">Кинопоиск</string>
+    <string name="director">Режиссёр</string>
+    <string name="actor">Актёры</string>
+    <string name="schedule">Расписание</string>
 </resources>
