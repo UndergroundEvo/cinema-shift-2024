@@ -1,15 +1,17 @@
 package com.shift.cinemaapp.data
 
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.shift.cinemaapp.Film
+import com.shift.cinemaapp.data.model.Film
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -21,8 +23,15 @@ sealed interface CinemaUiState {
 }
 
 class CinemaViewModel(
-    private val cinemaRepository: CinemaRepository
+    private val cinemaRepository: CinemaRepository,
 ) : ViewModel() {
+
+    /*
+      Про отсуствие @composable услышал в View, суть в том что
+      жизненный цикл у ViewModel больше чем у самого интрефейса,
+      пока не очень понимаю как это исправить ибо опыта не хватает(((
+      https://developer.android.com/topic/libraries/architecture/viewmodel?hl=en#implement-viewmodel
+    */
 
     var cinemaUiState: CinemaUiState by mutableStateOf(CinemaUiState.Loading)
         private set
