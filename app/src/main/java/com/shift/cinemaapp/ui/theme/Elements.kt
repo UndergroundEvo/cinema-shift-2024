@@ -1,7 +1,5 @@
 package com.shift.cinemaapp.ui.theme
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,22 +10,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,17 +34,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.shift.cinemaapp.data.model.Film
 import com.shift.cinemaapp.R
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import com.shift.cinemaapp.data.model.Film
 
 data class BottomNavigationItem(
     val title: String,
@@ -60,16 +49,6 @@ data class BottomNavigationItem(
     val hasNews: Boolean,
     val badgeCount: Int? = null
 )
-
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-//@Preview
-fun topBar(title: String) {
-    TopAppBar(
-        title = { Text(text = title) }
-    )
-}
 
 @Composable
 fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
@@ -98,43 +77,27 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieCard(
     movie: Film,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
+    val sheetState = rememberModalBottomSheetState()
+    var isSheetOpen by rememberSaveable {
+        mutableStateOf(false)
+    }
     Card(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth(),
-            //.requiredHeight(300.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.background
-        ),
-        //border = BorderStroke(1.dp, Color.Black),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        )
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
         //elevation = 8.dp
     ) {
         Row {
-            Column() {
-                AsyncImage(
-                    alignment = Alignment.Center,
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .padding(10.dp)
-                        .clip(RoundedCornerShape(percent = 3)),
-                    model = ImageRequest.Builder(context = LocalContext.current)
-                        //надо будет это поправить
-                        .data("https://shift-backend.onrender.com"+movie.img)
-                        .crossfade(true)
-                        .build(),
-                    error = painterResource(id = R.drawable.baseline_error_outline_24),
-                    placeholder = painterResource(id = R.drawable.baseline_history_toggle_off_24),
-                    contentDescription = stringResource(id = R.string.app_name),
-                    contentScale = ContentScale.Crop
-                )
+            Column {
+                MovieImage(modifier, movie)
                 movie.name.let {
                     Text(
                         text = it,
@@ -175,7 +138,9 @@ fun MovieCard(
                     )
                 }
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        isSheetOpen = true
+                              },
                     modifier = modifier
                         .padding(12.dp),
                     ) {
@@ -183,6 +148,164 @@ fun MovieCard(
                 }
             }
         }
+    }
+    if (isSheetOpen){
+        ModalBottomSheet(
+            sheetState = sheetState,
+            onDismissRequest = { isSheetOpen = false }
+        ) {
+            Column(
+                modifier = modifier
+                    .padding(4.dp)
+                    .fillMaxWidth()
+            ){
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    movie.name.let {
+                        Text(
+                            text = it,
+                            fontSize = 5.em,
+                            fontWeight = FontWeight.Bold,
+                            modifier = modifier
+                                .padding(top = 4.dp, start = 13.dp)
+                                .weight(3f)
+                        )
+                    }
+                    Card(
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.Black
+                        ),
+                        modifier = Modifier.padding(end = 13.dp),
+                    ) {
+                        movie.ageRating.let {
+                            Text(
+                                text = it,
+                                fontSize = 6.em,
+                                fontWeight = FontWeight.Black,
+                                color = Color.White,
+                                modifier = modifier
+                                    .padding(start = 17.dp, end = 17.dp, top = 7.dp, bottom = 7.dp)
 
+                            )
+                        }
+                    }
+                }
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp)
+                ) {
+                    movie.releaseDate.let {
+                        Text(
+                            text = it,
+                            fontSize = 3.em,
+                            fontWeight = FontWeight.Light,
+                            modifier = modifier
+                                .padding(top = 2.dp, start = 13.dp)
+                                .weight(2f)
+                        )
+                    }
+                    movie.country?.name?.let {
+                        Text(
+                            text = it,
+                            fontSize = 3.em,
+                            //TextAlign = TextAlign.Right,
+                            fontWeight = FontWeight.Bold,
+                            //fontWeight = FontWeight.,
+                            modifier = modifier
+                                .padding(top = 2.dp, end = 16.dp)
+                        )
+                    }
+                }
+                OutlinedCard(modifier = modifier .padding(15.dp)) {
+                    movie.description.let {
+                        Text(
+                            text = it,
+                            fontSize = 3.em,
+                            //fontWeight = FontWeight.Bold,
+                            modifier = modifier
+                                .padding(13.dp)
+                                .align(Alignment.Start)
+                        )
+                    }
+                }
+                Row(modifier = modifier .padding(start = 13.dp)) {
+                    movie.genres.forEach{
+                        Card(
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                            modifier = Modifier.padding(end = 4.dp)
+                        ) {
+                            Text(
+                                text = it,
+                                modifier = Modifier.padding(5.dp)
+                            )
+                        }
+                    }
+                }
+                //поправить для филиппа
+                Box(modifier = Modifier.padding(start = 13.dp, top = 7.dp)
+                    .wrapContentSize()){
+                    movie.directors.forEach {
+                    Text(
+                        text = stringResource(R.string.director)+": "+it.fullName.toString(),
+                        fontSize = 3.em,
+                        //fontWeight = FontWeight.Bold,
+                        modifier = modifier
+                            .padding(start = 4.dp)
+                        )
+                    }
+                }
+
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(13.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.schedule),
+                        fontSize = 3.em,
+                    )
+                }
+//                Row(modifier = modifier
+//                    .padding(start = 13.dp)
+//                    .wrapContentSize(),
+//                ) {
+//                    Text(text = stringResource(R.string.actor)+": ")
+//                    movie.actors.forEach {
+//                        Text(
+//                            text = it.fullName + "\n ",
+//                            fontSize = 3.em,
+//                            //fontWeight = FontWeight.Bold,
+//                            modifier = modifier
+//                        )
+//                    }
+//                }
+
+            }
+        }
     }
 }
+
+@Composable
+private fun MovieImage(
+    modifier: Modifier,
+    movie: Film
+) {
+    AsyncImage(
+        alignment = Alignment.Center,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .clip(RoundedCornerShape(percent = 3)),
+        model = ImageRequest.Builder(context = LocalContext.current)
+            //надо будет это поправить
+            .data("https://shift-backend.onrender.com" + movie.img)
+            .crossfade(true)
+            .build(),
+        error = painterResource(id = R.drawable.baseline_error_outline_24),
+        placeholder = painterResource(id = R.drawable.baseline_history_toggle_off_24),
+        contentDescription = stringResource(id = R.string.app_name),
+        contentScale = ContentScale.Crop
+    )
+}
+
