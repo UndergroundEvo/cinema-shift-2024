@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">CinemaApp</string>
+    <string name="app_name">Cinema SHIFT</string>
+    <string name="afisha">Movies</string>
+    <string name="tickets">Tickets</string>
+    <string name="profile">Profile</string>
+    <string name="no_internet">Lost internet connection</string>
+    <string name="again">Retry</string>
+    <string name="more">More</string>
+    <string name="kinopoisk">Kinopoisk</string>
+    <string name="director">Director</string>
+    <string name="actor">Actors</string>
+    <string name="schedule">Schedule</string>
 </resources>
